@@ -1,6 +1,15 @@
+interface TestimonyItem {
+  description: string;
+  src: string;
+  name?: string;
+  email?: string;
+}
 
+interface Props {
+  item: TestimonyItem;
+}
 
-const ClientSingleTestimony = ({ item }) => {
+const ClientSingleTestimony = ({ item }: Props) => {
   return (
     <div className="bg-white flex items-stretch gap-6 p-6 rounded-xl shadow-md min-w-[500px]">
       
@@ -10,9 +19,11 @@ const ClientSingleTestimony = ({ item }) => {
         <p className="text-gray-700">{item.description}</p>
 
         <div>
-          <p className="font-semibold">Iriboneye Nina</p>
+          <p className="font-semibold">
+            {item.name || "Iriboneye Nina"}
+          </p>
           <p className="text-gray-500 text-sm">
-            nina@ceremony.rw
+            {item.email || "nina@ceremony.rw"}
           </p>
         </div>
       </div>
