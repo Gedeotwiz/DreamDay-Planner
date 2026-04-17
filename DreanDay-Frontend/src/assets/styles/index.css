@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+    --color-primary: #87acec;
+    --color-secondary: #a6c1ee;
+    --color-universal: #3B82F6;
+    --color-dark: #010c1f;
+    --color-white: #ffff  
+}
+
+.PhoneInputInput {
+  border: none !important;
+  outline: none !important;
+  width: 100%;
+  background: transparent;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+}
