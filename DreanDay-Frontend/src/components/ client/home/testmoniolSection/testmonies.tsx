@@ -10,17 +10,17 @@ const ClientSingleTestimonies = () => {
   const testimonies = [
     {
       description:
-        "I now have school materials and a new school uniform after a total stranger bought me one.",
+        "The flowers are beautifully arranged and perfect for weddings. Honestly, this website made my wedding look amazing.",
       src: img1,
     },
     {
       description:
-        "As a school in a remote area, we are deeply thankful for the books you've provided.",
+        "The services offered here are affordable and of high quality—they dress you in a way that suits you perfectly",
       src: img2,
     },
     {
       description:
-        "I am a student who struggled to pay school fees. Now I can focus on studies.",
+        "This website provides excellent and fast services. I recently requested them to deliver a cake to me, and it arrived quickly and at a low price.",
       src: img3,
     },
   ];

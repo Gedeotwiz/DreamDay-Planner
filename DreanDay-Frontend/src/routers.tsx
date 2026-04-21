@@ -3,6 +3,8 @@ import Authantication from './pages/auth';
 import NotFoundPage from './components/share/NotFoundPage';
 import LandingPage from './pages/ client';
 import Layout from './components/share/Layout';
+import Services from './pages/ client/services';
+import SingleServicePage from './pages/ client/singleService';
 
 function Routers() {
  
@@ -12,6 +14,8 @@ function Routers() {
   <Routes>
     <Route path='/' element={<Layout />}>
        <Route index element={<LandingPage />}/>
+       <Route path='services' element={<Services/>}/>
+       <Route path='services/:id' element={<SingleServicePage/>}/>
     </Route>
    
     <Route path='/login' element={<Authantication />}/>

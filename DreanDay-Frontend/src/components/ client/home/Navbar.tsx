@@ -1,37 +1,43 @@
 /** @format */
 
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 import { ChevronDown } from "lucide-react";
+import SearchBar from "../../share/search";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+  const [showSearch, setShowSearch] = useState(false);
+  const [absolute,setAbsolut]= useState(false)
+
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const linksArray = [
     {
-      name: 'OUR SERVICES',
-      path: 'services',
+      name: "OUR SERVICES",
+      path: "services",
     },
     {
-      name: 'WORK',
-      path: 'work',
+      name: "WORK",
+      path: "work",
     },
-  {
-    name: (
-      <span className="flex items-center gap-1">
-        ABOUT <ChevronDown size={16} />
-      </span>
-    ),
-    children: [
-      { name: 'COMPANY', path: 'company' },
-      { name: 'OUR STORY', path: 'our-story' },
-    ],
-  },
+    {
+      name: (
+        <span className="flex items-center gap-1">
+          ABOUT <ChevronDown size={16} />
+        </span>
+      ),
+      children: [
+        { name: "COMPANY", path: "company" },
+        { name: "OUR STORY", path: "our-story" },
+      ],
+    },
   ];
 
+  
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -39,93 +45,92 @@ function Navbar() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  
+  useEffect(() => {
+    if (location.pathname === "/services") {
+      setShowSearch(true);
+      setAbsolut(false)
+    } else {
+      setShowSearch(false);
+      setAbsolut(true)
+    }
+  }, [location.pathname]);
+
   return (
-    <div className='bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] relative z-40'>
-      <div className='flex flex-col md:flex-row items-center justify-between bg-white pr-10'>
-        <div className='flex'>
-          <Link to='/'>
-            <img
-              src='/WeedingLogo-.png'
-              className='w-[250px]'
-              alt='Logo'
-            />
+    <div className="bg-white relative pb-5 z-40">
+      <div className="flex flex-col md:flex-row items-center justify-between pr-10">
+        
+        
+        <div className="flex items-center">
+          <Link to="/">
+            <img src="/WeedingLogo-.png" className="w-[250px]" alt="Logo" />
           </Link>
+
+         
           <button
-            className='block lg:hidden px-4 py-2 text-[#010c1f] hover:text-black'
+            className="block lg:hidden px-4 py-2 text-[#010c1f]"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M4 6h16M4 12h16m-7 6h7'
-                />
-              </svg>
-            )}
+            {isOpen ? "✕" : "☰"}
           </button>
         </div>
 
-        <nav
-          className={`lg:flex lg:flex-row items-center   lg:items-center ${isOpen ? 'block' : 'hidden'} `}
-        >
-          <div className='flex w-[250px] md:w-full flex-col gap-5 pb-5 lg:flex-row lg:gap-10 items-center justify-around'>
+       
+        <nav className={`lg:flex ${isOpen ? "block" : "hidden"} items-center`}>
+          <div className="flex w-[250px] md:w-full flex-col gap-5 pb-5 lg:flex-row lg:gap-10 items-center justify-around">
             {linksArray.map((router, index) => (
-              <div
-                key={index}
-                className='relative'
-              >
+              <div key={index} className="relative" ref={dropdownRef}>
+                
+               
                 {router.children ? (
                   <button
                     onClick={() =>
-                      setOpenDropdown(openDropdown === index ? null : index)
+                      setOpenDropdown(
+                        openDropdown === index ? null : index
+                      )
                     }
-                    className='text-[#87acec] hover:text-universal text-lg flex items-center gap-1'
+                    className={`text-[#87acec] text-lg flex items-center gap-1 pb-1 ${
+                      router.children.some(
+                        (child) =>
+                          location.pathname === `/${child.path}`
+                      )
+                        ? "border-b-2 border-[#87acec]"
+                        : ""
+                    }`}
                   >
                     {router.name}
                   </button>
                 ) : (
                   <Link
-                    to={router.path}
-                    className='text-[#87acec] hover:text-universal text-lg'
+                    to={`/${router.path}`}
+                    className={`text-[#87acec] text-lg pb-1 ${
+                      location.pathname === `/${router.path}`
+                        ? "border-b-2 border-[#87acec]"
+                        : ""
+                    }`}
                   >
                     {router.name}
                   </Link>
                 )}
 
+                
                 {router.children && openDropdown === index && (
-                  <div className='absolute left-0 top-full mt-2 w-40 bg-white shadow-lg rounded-md z-50'>
+                  <div className="absolute left-0 top-full mt-2 w-40 bg-white shadow-lg rounded-md z-50">
                     {router.children.map((item, i) => (
                       <Link
                         key={i}
-                        to={item.path}
-                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#fbc2eb] hover:text-white'
-                        onClick={() => setOpenDropdown(null)} 
+                        to={`/${item.path}`}
+                        onClick={() => setOpenDropdown(null)}
+                        className={`block px-4 py-2 text-sm ${
+                          location.pathname === `/${item.path}`
+                            ? "bg-[#fbc2eb] text-white"
+                            : "text-gray-700 hover:bg-[#fbc2eb] hover:text-white"
+                        }`}
                       >
                         {item.name}
                       </Link>
@@ -136,24 +141,38 @@ function Navbar() {
             ))}
           </div>
         </nav>
+
+        
         <div
           className={`${
-            isOpen ? 'flex' : 'hidden'
+            isOpen ? "flex" : "hidden"
           } lg:flex items-center gap-5 mt-4 lg:mt-0`}
         >
-          <div className='text-[#a6c1ee] bg-gray-100 p-3 rounded-full cursor-pointer'>
+          <div
+            className="text-[#a6c1ee] hidden md:block bg-gray-100 p-3 rounded-full cursor-pointer"
+            onClick={() => setShowSearch((prev) => !prev)}
+          >
             <FaSearch />
           </div>
 
           <Link
-            to='/login'
-            className='text-[#87acec] px-5 py-2 rounded-md border-2 border-[#87acec] hover:bg-[#87acec] hover:text-white transition'
+            to="/login"
+            className="text-[#87acec] px-5 py-2 rounded-md border-2 border-[#87acec] hover:bg-[#87acec] hover:text-white transition"
           >
             SIGN IN
           </Link>
         </div>
       </div>
+
+      <div
+        className={`w-full bg-white flex pb-10 flex-col justify-center items-center transition-all duration-300 ${absolute ? "absolute":""}  ${
+          showSearch ? "block" : "hidden"
+        }`}
+      >
+      <SearchBar/>
+      </div>
     </div>
   );
 }
+
 export default Navbar;
