@@ -7,6 +7,7 @@ type GSubmitButtonProps = {
   background?: string;
   width?: string;
   style?: React.CSSProperties;
+  type?: "button" | "submit" | "reset";
 };
 
 const GSubmitButton: React.FC<GSubmitButtonProps> = ({
@@ -16,12 +17,14 @@ const GSubmitButton: React.FC<GSubmitButtonProps> = ({
   background = "bg-gradient-to-r from-blue-500 to-purple-600",
   width = "w-full",
   style,
+  type = "button",
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={loading}
       style={style}
+      type={type}
       className={`
         ${width}
         ${background}

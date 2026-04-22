@@ -1,22 +1,55 @@
 /** @format */
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { GInput, GInputPassword } from './Input';
 import { User } from 'lucide-react';
 import { useChangeValue } from '../../hooks/InputHook';
 import { GSubmitButton } from '../share/button';
 import GCheckbox from './checkbox';
+  import { ToastContainer, toast } from 'react-toastify';
 
 const LoginForm = () => {
   const { values, handleChange } = useChangeValue();
   const [remember, setRemember] = useState(false);
+  const [loading,setLoading]=useState(false)
+
+  const navigate = useNavigate();
+
+const handleLogin = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const email = values.email?.trim();
+  const password = values.password?.trim();
+
+  if (!email || !password) {
+    toast.error("Please fill all fields");
+    return;
+  }
+
+  setLoading(true); 
+
+  if (email === "user@gmail.com" && password === "123456") {
+      toast.success("Login successful 🎉");
+
+    } else {
+      toast.error("Invalid email or password");
+    }
+
+  setTimeout(() => {
+     navigate("/services"); 
+
+    setLoading(false); 
+  }, 1000);
+};
   return (
     <div className='bg-white w-4/5 md:w-2/7 rounded-2xl flex flex-col p-6 md:p-16 gap-16 items-center'>
+      <ToastContainer/>
       <div>
         <h1 className='text-dark font-bold text-4xl'>Login</h1>
       </div>
       <form
         action=''
+        onSubmit={handleLogin}
         className='w-full flex flex-col gap-5'
       >
         <GInput
@@ -39,7 +72,7 @@ const LoginForm = () => {
           onChange={setRemember}
           label='Keep me signed in'
         />
-        <GSubmitButton name='Login' />
+        <GSubmitButton name='Login' type="submit" loading={loading}/>
         <p className='text-center py-5'>
           Forgot password?{' '}
           <Link

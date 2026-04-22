@@ -10,7 +10,7 @@
     },
       {
          id:2,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Event decoration",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -19,7 +19,7 @@
     },
       {
          id:3,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "To use figurative language",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -28,7 +28,7 @@
     },
       {
          id:4,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Traditional singers",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -37,7 +37,7 @@
     },
       {
          id:5,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Traditional dancer",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -46,7 +46,7 @@
     },
       {
          id:6,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "We provide beverage services for events.",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -55,7 +55,7 @@
     },
       {
          id:7,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Delicious catering for your special events.",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -64,7 +64,7 @@
     },
       {
          id:8,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Master of ceremony person",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -73,7 +73,7 @@
     },
       {
          id:9,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Event Protocol and Management Services",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
@@ -82,7 +82,7 @@
     },
       {
          id:10,
-      title: "Rent beautiful wedding clothes for your special day",
+      title: "Sound System (Sonorisation) and Photography",
       min_price: "1000",
       max_price: "5000",
       shipping: 500,
